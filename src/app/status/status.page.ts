@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage-angular'; //Necessary!
 
 @Component({
   selector: 'app-status',
@@ -9,13 +9,17 @@ import { Storage } from '@ionic/storage-angular';
 export class StatusPage implements OnInit {
   myStatus:string = "";
 
+  //Use constructor to initialize Storage.
   constructor(private str:Storage) { }
 
   ngOnInit() {
   }
 
+  //Must use async/await (remember from xamarin?), as file saving may take time.
+
   async onSave() {
     await this.str.create();
+    //Save myStatus.
     await this.str.set("Status", this.myStatus);
   }
 }
